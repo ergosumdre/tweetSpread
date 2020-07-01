@@ -5,7 +5,7 @@ library(data.table)
 args <- commandArgs(trailingOnly = FALSE) # Allows argument from SLURM job
 fileName_var <- args[6] # Takes argument from SLURM job
 fileLocation <- fileName_var # issues with using fileName_var... passing value to new var solves issue
-
+loc <- ""
 timeSpread <- function(x){
   df <- fread(x,# Reads in only `created_at` column in table/tweet
               integer64 = "character",
@@ -15,7 +15,7 @@ timeSpread <- function(x){
 }
 
 tweetSpread <- timeSpread(fileLocation) # do function
-endLocation <- paste0("/shares_bgfs/si_twitter/covid19/tables/metadata/", # establish where to save csv
+endLocation <- paste0(loc, # establish where to save csv
                       substr(fileLocation,46, 58), "_numOfTweets.csv")# grabs YYYY-MM-DD-HH from original fileLocation string
 write.csv(x = tweetSpread,  file = endLocation) # writes csv to file location
 
