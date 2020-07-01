@@ -2,8 +2,8 @@
 
 library(data.table)
 
-args <- commandArgs(trailingOnly = FALSE) # Allows arguement from SLURM job
-fileName_var <- args[6] # Takes arguements from SLURM job
+args <- commandArgs(trailingOnly = FALSE) # Allows argument from SLURM job
+fileName_var <- args[6] # Takes argument from SLURM job
 fileLocation <- fileName_var # issues with using fileName_var... passing value to new var solves issue
 
 timeSpread <- function(x){
@@ -15,10 +15,10 @@ timeSpread <- function(x){
 }
 
 tweetSpread <- timeSpread(fileLocation) # do functions
-endLocation <- paste0("/shares_bgfs/si_twitter/covid19/tables/metadata/", # establishes where to save csv
-                      substr(fileLocation,46, 58), "_numOfTweets.csv")# grabs YYYY-MM-DD-HH from original fileName string
+endLocation <- paste0("/shares_bgfs/si_twitter/covid19/tables/metadata/", # establish where to save csv
+                      substr(fileLocation,46, 58), "_numOfTweets.csv")# grabs YYYY-MM-DD-HH from original fileLocation string
 write.csv(x = tweetSpread,  file = endLocation) # writes csv to file location
 
-print(paste0("Finished with: ",substr(fileLocation,46, 58))) # progess indicator -- Mainly for SLURM output
+print(paste0("Finished with: ",substr(fileLocation,46, 58))) # progess indicator -- Mainly for SLURM job output
 rm(list=ls()) # Save memory
 quit() 
