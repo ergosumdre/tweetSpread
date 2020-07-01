@@ -14,7 +14,7 @@ timeSpread <- function(x){
   return(data.frame(tweetsPerMinute = summary(df2))) # summary of df2 (gives number of tweets per min)
 }
 
-tweetSpread <- timeSpread(fileLocation) # do functions
+tweetSpread <- timeSpread(fileLocation) # do function
 endLocation <- paste0("/shares_bgfs/si_twitter/covid19/tables/metadata/", # establish where to save csv
                       substr(fileLocation,46, 58), "_numOfTweets.csv")# grabs YYYY-MM-DD-HH from original fileLocation string
 write.csv(x = tweetSpread,  file = endLocation) # writes csv to file location
